@@ -23,12 +23,8 @@ const projects = [
   },
 ]
 
-export default function index() {
+export default function Projects() {
   const [modal, setModal] = React.useState({ active: false, index: 0 })
-
-  React.useEffect(() => {
-    console.log(modal)
-  }, [modal])
 
   return (
     <main className="h-screen flex items-center justify-center">

@@ -10,17 +10,13 @@ export default function MainParallaxZooom() {
   const easing = 0.15;
   let easedScrollProgress = 0;
 
-  React.useEffect(() => {
-    requestAnimationFrame(animate)
-  }, [])
-
   const animate = () => {
     if (!stickyMask.current) return
     const maskSizeProgress = targetMaskSize * getScrollProgress();
     stickyMask.current.style.webkitMaskSize = (initialMaskSize + maskSizeProgress) * 100 + "%";
     requestAnimationFrame(animate)
   }
-
+  
   const getScrollProgress = () => {
     if (!stickyMask.current || !container.current) return 0
     const scrollProgress = stickyMask.current.offsetTop / (container.current.getBoundingClientRect().height - window.innerHeight)
@@ -28,6 +24,10 @@ export default function MainParallaxZooom() {
     easedScrollProgress += delta * easing;
     return easedScrollProgress
   }
+
+  React.useEffect(() => {
+    requestAnimationFrame(animate)
+  }, [animate])
 
   return (
     <div className="bg-emerald-700 pt-[20vh]">

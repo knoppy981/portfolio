@@ -17,18 +17,17 @@ export default function Modal({ modal, projects }: {
   const modalContainer = useRef(null);
   const cursor = useRef(null);
   const cursorLabel = useRef(null);
-  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     //Move Container
-    let xMoveContainer = gsap.quickTo(modalContainer.current, "left", { duration: 0.8, ease: "power3" })
-    let yMoveContainer = gsap.quickTo(modalContainer.current, "top", { duration: 0.8, ease: "power3" })
+    const xMoveContainer = gsap.quickTo(modalContainer.current, "left", { duration: 0.8, ease: "power3" })
+    const yMoveContainer = gsap.quickTo(modalContainer.current, "top", { duration: 0.8, ease: "power3" })
     //Move cursor
-    let xMoveCursor = gsap.quickTo(cursor.current, "left", { duration: 0.5, ease: "power3" })
-    let yMoveCursor = gsap.quickTo(cursor.current, "top", { duration: 0.5, ease: "power3" })
+    const xMoveCursor = gsap.quickTo(cursor.current, "left", { duration: 0.5, ease: "power3" })
+    const yMoveCursor = gsap.quickTo(cursor.current, "top", { duration: 0.5, ease: "power3" })
     //Move cursor label
-    let xMoveCursorLabel = gsap.quickTo(cursorLabel.current, "left", { duration: 0.45, ease: "power3" })
-    let yMoveCursorLabel = gsap.quickTo(cursorLabel.current, "top", { duration: 0.45, ease: "power3" })
+    const xMoveCursorLabel = gsap.quickTo(cursorLabel.current, "left", { duration: 0.45, ease: "power3" })
+    const yMoveCursorLabel = gsap.quickTo(cursorLabel.current, "top", { duration: 0.45, ease: "power3" })
 
     window.addEventListener('mousemove', (e) => {
       const { pageX, pageY } = e;
@@ -42,7 +41,7 @@ export default function Modal({ modal, projects }: {
   }, [])
 
   useEffect(() => {
-    const handleWindowClick = (event: any) => {
+    const handleWindowClick = (event: MouseEvent) => {
       console.log("Window clicked!", event);
       console.log(active);
       console.log(index);
@@ -55,7 +54,7 @@ export default function Modal({ modal, projects }: {
     return () => {
       window.removeEventListener("click", handleWindowClick);
     };
-  }, [modal]);
+  }, [active, index]);
 
   return (
     <>
@@ -97,10 +96,6 @@ export default function Modal({ modal, projects }: {
         variants={scaleAnimation}
         initial="initial"
         animate={active ? "enter" : "closed"}
-        onClick={() => {
-          console.log("HI!")
-          setOpen(prevState => !prevState)
-        }}
       >
       </motion.div>
 
